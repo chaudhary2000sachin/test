@@ -56,6 +56,8 @@ This guide covers:
 sudo apt update && sudo apt upgrade -y
 ```
 
+  <img width="960" height="326" alt="Image" src="https://github.com/user-attachments/assets/14f898f8-64db-4c0e-b3f1-f0f4b4053a04" />
+
 ---
 
 ### Step 2: Check Existing Java Installation
@@ -63,6 +65,8 @@ sudo apt update && sudo apt upgrade -y
 ```bash
 java -version
 ```
+
+ <img width="732" height="196" alt="Image" src="https://github.com/user-attachments/assets/b1ef78d9-2c0f-4a43-a46c-10e8dc61a910" />
 
 > If Java is installed, you'll see the version details. If not, proceed to the next step.
 
@@ -76,17 +80,23 @@ java -version
 sudo apt install openjdk-11-jdk -y
 ```
 
+  <img width="732" height="140" alt="Image" src="https://github.com/user-attachments/assets/2e8885e2-8cb4-49bf-add1-40bd8a0e41ae" />
+  
 #### For Java 17 (Newer LTS):
 
 ```bash
 sudo apt install openjdk-17-jdk -y
 ```
-
+   <img width="732" height="208" alt="Image" src="https://github.com/user-attachments/assets/96358b77-a13a-47be-a5e0-949f3dd48b35" />
+  
+  
 #### For JRE only (runtime environment):
 
 ```bash
 sudo apt install openjdk-11-jre -y
 ```
+
+ <img width="691" height="143" alt="Image" src="https://github.com/user-attachments/assets/a29f3d69-f4f7-44a1-83df-58f773719997" />
 
 ---
 
@@ -97,6 +107,8 @@ java --version  # Check Java
 javac --version # Check compiler (JDK)
 ```
 
+  <img width="760" height="126" alt="Image" src="https://github.com/user-attachments/assets/16694e67-ba6c-41b1-b1c0-3af65118608a" />
+
 ---
 
 ### Step 5: Set Default Java Version (If Multiple Installed)
@@ -104,6 +116,8 @@ javac --version # Check compiler (JDK)
 ```bash
 sudo update-alternatives --config java
 ```
+  <img width="1063" height="274" alt="Image" src="https://github.com/user-attachments/assets/7ccc7cad-e6d8-4220-a905-1bde9346cec0" />
+
 > Select your preferred version from the list.
 
 ---
@@ -115,6 +129,8 @@ Find Java installation path:
 ```bash
 sudo update-alternatives --config java
 ```
+
+  <img width="748" height="192" alt="Image" src="https://github.com/user-attachments/assets/eb8a4bc9-8c5c-4497-aee8-b5b17d6e2ab8" />
 
 Example path: `/usr/lib/jvm/java-11-openjdk-amd64/bin/java`
 
@@ -130,6 +146,8 @@ Add this line (use your actual path without `/bin/java`):
 JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 ```
 
+  <img width="945" height="100" alt="Image" src="https://github.com/user-attachments/assets/3e6e63f6-52a5-4ef1-a36b-d34b12b08884" />
+
 Reload:
 
 ```bash
@@ -141,6 +159,8 @@ Verify:
 ```bash
 echo $JAVA_HOME
 ```
+
+  <img width="492" height="90" alt="Image" src="https://github.com/user-attachments/assets/da6e3cc0-18a2-4cd2-8cb9-f91ed6bceee8" />
 
 ---
 
@@ -156,6 +176,8 @@ echo $JAVA_HOME
     }
     ```
 
+    <img width="492" height="122" alt="Image" src="https://github.com/user-attachments/assets/7283ad1a-5489-4205-89bd-4e674d70583a" />
+
 2. **Compile and Run:**
 
     ```bash
@@ -163,6 +185,8 @@ echo $JAVA_HOME
     java HelloWorld
     ```
 
+    <img width="492" height="77" alt="Image" src="https://github.com/user-attachments/assets/7ad9f165-ccac-4ddf-8624-58940b17c3c8" />
+   
 > **Output:**  
 > `Java works on Linux!`
 
