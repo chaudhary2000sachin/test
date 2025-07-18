@@ -1,5 +1,32 @@
 # Standard Operating Procedure (SOP): Disk Usage and Ulimit Management
 
+## Table of Contents
+
+1. [Purpose](#purpose)
+2. [Scope](#scope)
+3. [Prerequisites](#prerequisites)
+4. [Procedure](#procedure)
+
+    4.1. [Introduction](#41-introduction)  
+    4.2. [Disk Usage in Linux](#42-disk-usage-in-linux)  
+        4.2.1. [Checking Disk Usage](#421-checking-disk-usage)  
+            4.2.1.1. [`df` Command](#4211-df-command)  
+            4.2.1.2. [`du` Command](#4212-du-command)  
+        4.2.2. [Mount Points](#422-mount-points)  
+        4.2.3. [Mounting and Unmounting Storage Blocks on AWS EC2](#423-mounting-and-unmounting-storage-blocks-on-aws-ec2)  
+    4.3. [Configuring Ulimit Settings](#43-configuring-ulimit-settings)  
+        4.3.1. [Checking Current Ulimit Values](#431-checking-current-ulimit-values)  
+        4.3.2. [Setting Temporary Ulimit](#432-setting-temporary-ulimit)  
+        4.3.3. [Configuring Persistent Ulimits for Users](#433-configuring-persistent-ulimits-for-users)  
+        4.3.4. [Ulimit for systemd Services](#434-ulimit-for-systemd-services)  
+        4.3.5. [Verifying Effective Limits](#435-verifying-effective-limits)  
+6. [Troubleshooting](#troubleshooting)
+7. [Conclusion](#conclusion)
+8. [References](#references)
+9. [Revision History](#revision-history)
+
+---
+
 ## Purpose
 
 To provide best practices and step-by-step instructions for monitoring disk usage and managing user limits (`ulimit`) on Linux systems, especially in AWS EC2 environments, ensuring system stability, efficient resource utilization, and compliance with industry standards.
@@ -20,36 +47,17 @@ This SOP applies to Linux-based systems, with a particular focus on AWS EC2 envi
 
 ---
 
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Disk Usage in Linux](#disk-usage-in-linux)
-    - [1.1. Checking Disk Usage](#11-checking-disk-usage)
-        - [1.1.1. `df` Command](#111-df-command)
-        - [1.1.2. `du` Command](#112-du-command)
-    - [1.2. Mount Points](#12-mount-points)
-    - [1.3. Mounting and Unmounting Storage Blocks on AWS EC2](#13-mounting-and-unmounting-storage-blocks-on-aws-ec2)
-3. [Configuring Ulimit Settings](#configuring-ulimit-settings)
-    - [2.1. Checking Current Ulimit Values](#21-checking-current-ulimit-values)
-    - [2.2. Setting Temporary Ulimit](#22-setting-temporary-ulimit)
-    - [2.3. Configuring Persistent Ulimits for Users](#23-configuring-persistent-ulimits-for-users)
-    - [2.4. Ulimit for systemd Services](#24-ulimit-for-systemd-services)
-    - [2.5. Verifying Effective Limits](#25-verifying-effective-limits)
-4. [References](#references)
-
----
-
-## Introduction
+### 4.1 Introduction
 
 This SOP provides best practices and step-by-step instructions for monitoring disk usage and managing user limits (`ulimit`) on Linux systems, with a specific focus on AWS EC2 environments. Following these guidelines ensures system stability, efficient resource utilization, and compliance with industry standards.
 
 ---
 
-## Disk Usage in Linux
+### 4.2 Disk Usage in Linux
 
-### 1.1. Checking Disk Usage
+#### 4.2.1 Checking Disk Usage
 
-#### 1.1.1. `df` Command
+##### 4.2.1.1 `df` Command
 
 The `df` command reports file system disk space usage.
 
@@ -59,20 +67,20 @@ The `df` command reports file system disk space usage.
   ```
   <img width="635" height="198" alt="Image" src="https://github.com/user-attachments/assets/f9b990a3-4a0e-4f30-ae87-b7354054ccd4" />
 
-  
 - **Show all mounted file systems (including pseudo-file systems):**
   ```bash
   df -a
   ```
 
   <img width="694" height="311" alt="Image" src="https://github.com/user-attachments/assets/5671b62e-2699-4433-a32b-dfa7b700046f" />
+
 - **Show file system type for each partition:**
   ```bash
   df -T
   ```
   <img width="834" height="228" alt="Image" src="https://github.com/user-attachments/assets/24cffa6a-ec68-4d3c-9856-b1a013a4a0b9" />
 
-#### 1.1.2. `du` Command
+##### 4.2.1.2 `du` Command
 
 The `du` command estimates file and directory space usage.
 
@@ -81,18 +89,21 @@ The `du` command estimates file and directory space usage.
   du -h /path/to/directory
   ```
   <img width="515" height="121" alt="Image" src="https://github.com/user-attachments/assets/3be7168e-43f7-4e27-b9fb-aca70a20837c" />
+
 - **Summarize total usage of a directory:**
   ```bash
   du -sh /path/to/directory
   ```
 
   <img width="441" height="75" alt="Image" src="https://github.com/user-attachments/assets/e75d623f-ebbd-481d-8842-cfc26af3dec8" />
+
 - **Display size of all files and subdirectories:**
   ```bash
   du -a /path/to/directory
   ```
 
   <img width="822" height="291" alt="Image" src="https://github.com/user-attachments/assets/7c9a636f-66b5-44b8-a61b-47fe1a0f93fe" />
+
 - **Show usage for each file and directory in the current directory:**
   ```bash
   du -sh *
@@ -102,7 +113,7 @@ The `du` command estimates file and directory space usage.
 
 ---
 
-### 1.2. Mount Points
+#### 4.2.2 Mount Points
 
 A mount point is a directory where an additional file system is attached and made accessible.
 
@@ -126,7 +137,7 @@ sudo mount [options] <device> <mount_point>
 
 ---
 
-### 1.3. Mounting and Unmounting Storage Blocks on AWS EC2
+#### 4.2.3 Mounting and Unmounting Storage Blocks on AWS EC2
 
 **Steps to attach and mount a new EBS volume:**
 
@@ -151,12 +162,11 @@ sudo mount [options] <device> <mount_point>
         - `Enter` (accept defaults)
         - `w` (write changes)
 
-
     <img width="723" height="290" alt="Image" src="https://github.com/user-attachments/assets/6f49037e-33a1-4be3-949f-a895dbb41215" />
 
 - Now check
 
-     ```bash
+    ```bash
     lsblk
     ```
 
@@ -166,7 +176,6 @@ sudo mount [options] <device> <mount_point>
     ```bash
     sudo mkfs.ext4 /dev/xvdf1
     ```
-
 
     <img width="628" height="198" alt="Image" src="https://github.com/user-attachments/assets/8412e97f-7219-4d5d-bb95-c4552bb593ec" />
   
@@ -191,11 +200,11 @@ sudo mount [options] <device> <mount_point>
 
 ---
 
-## Configuring Ulimit Settings
+### 4.3 Configuring Ulimit Settings
 
 `ulimit` sets user-level resource limits for system stability and security.
 
-### 2.1. Checking Current Ulimit Values
+#### 4.3.1 Checking Current Ulimit Values
 
 - **All limits for current shell:**
   ```bash
@@ -211,7 +220,7 @@ sudo mount [options] <device> <mount_point>
 
    <img width="578" height="75" alt="Image" src="https://github.com/user-attachments/assets/063735c9-0863-44bd-9341-4d28d60aab59" />
 
-### 2.2. Setting Temporary Ulimit
+#### 4.3.2 Setting Temporary Ulimit
 
 - **Set open files limit for current session:**
   ```bash
@@ -220,7 +229,7 @@ sudo mount [options] <device> <mount_point>
   <img width="578" height="99" alt="Image" src="https://github.com/user-attachments/assets/5e7547c8-c72d-490c-92db-a93e8d8f12f3" />
 > _Note: This change lasts only for the current shell session._
 
-### 2.3. Configuring Persistent Ulimits for Users
+#### 4.3.3 Configuring Persistent Ulimits for Users
 
 - **Edit `/etc/security/limits.conf`:**
   ```bash
@@ -243,7 +252,7 @@ sudo mount [options] <device> <mount_point>
     - `soft`: User-modifiable limit (up to the hard limit)
     - `hard`: Max enforceable limit
 
-### 2.4. Ulimit for systemd Services
+#### 4.3.4 Ulimit for systemd Services
 
 - **Override or edit the service unit file:**
     ```
@@ -256,7 +265,7 @@ sudo mount [options] <device> <mount_point>
     sudo systemctl restart <service-name>
     ```
 
-### 2.5. Verifying Effective Limits
+#### 4.3.5 Verifying Effective Limits
 
 - **After login or restart:**
     ```bash
@@ -279,12 +288,17 @@ sudo mount [options] <device> <mount_point>
 
 ---
 
+## Conclusion
+
+Monitoring disk usage and configuring appropriate user limits are crucial for maintaining Linux system performance and reliability, especially in cloud environments like AWS EC2. By following this SOP, administrators can ensure optimal resource utilization, prevent outages due to disk or limit issues, and streamline troubleshooting. Regularly reviewing disk and ulimit configurations, combined with proactive maintenance, will help sustain long-term system health.
+
+---
+
 ## References
 
-- [Linux man pages: df(1), du(1), mount(8), umount(8)](https://man7.org/linux/man-pages/)
-- [AWS Documentation: Attaching EBS Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
-- [Linux System Administrator’s Guide](https://www.tldp.org/LDP/sag/html/)
-- [systemd Resource Control](https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html)
+- [Checking Disk Space in Linux - GeeksforGeeks](https://www.geeksforgeeks.org/linux-unix/checking-disk-space-in-linux/)
+- [Mount Command in Linux with Examples - GeeksforGeeks](https://www.geeksforgeeks.org/linux-unix/mount-command-in-linux-with-examples/)
+- [ulimit, Soft Limits and Hard Limits in Linux - GeeksforGeeks](https://www.geeksforgeeks.org/linux-unix/ulimit-soft-limits-and-hard-limits-in-linux/)
 
 ---
 
@@ -292,4 +306,4 @@ sudo mount [options] <device> <mount_point>
 
 | Version | Date       | Author           | Description                        |
 | ------- | ---------- | ----------------| -----------------------------------|
-| 1.0     | 2025-07-18 | Sachin Chaudhary| Initial creation and documentation |
+| 1.0     | 2025-07-18 |   Sachin Kumar  | Initial creation and documentation |
