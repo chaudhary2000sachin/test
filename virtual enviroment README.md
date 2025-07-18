@@ -44,6 +44,8 @@ A **virtual environment** is an isolated directory that contains a specific Pyth
   python3 --version
   ```
 
+   <img width="456" height="84" alt="Image" src="https://github.com/user-attachments/assets/6cba5fab-a164-4f2d-a559-f34a44f53a85" />
+
 ### Creating a Virtual Environment
 
 Run the following command in your project directory:
@@ -52,21 +54,22 @@ Run the following command in your project directory:
 python3 -m venv <env_name>
 ```
 
+  <img width="490" height="118" alt="Image" src="https://github.com/user-attachments/assets/fc68febc-f6a2-4960-a09b-d438606a9c55" />
+
+
 - Replace `<env_name>` with your preferred environment name (e.g., `venv` or `.venv`).
 - This creates a directory containing a copy of the Python interpreter and a local `site-packages`.
 
 ### Activating the Virtual Environment
 
-**On Windows:**
-```bat
-<env_name>\Scripts\activate
-```
 
 **On Unix or MacOS:**
 ```sh
 source <env_name>/bin/activate
 ```
 
+  <img width="529" height="70" alt="Image" src="https://github.com/user-attachments/assets/44b5fa2f-c88a-466f-9058-26fae1b34e7a" />
+  
 Once activated, your shell prompt will change to show the environment name.
 
 ### Deactivating the Virtual Environment
@@ -77,6 +80,9 @@ To exit the virtual environment, simply run:
 deactivate
 ```
 
+  <img width="464" height="63" alt="Image" src="https://github.com/user-attachments/assets/7f739ceb-1c14-44d0-ba79-bf07df7dc9e6" />
+
+
 ### Deleting a Virtual Environment
 
 To remove a virtual environment, deactivate it and then delete the directory:
@@ -84,6 +90,8 @@ To remove a virtual environment, deactivate it and then delete the directory:
 ```sh
 rm -rf <env_name>
 ```
+
+  <img width="531" height="320" alt="Image" src="https://github.com/user-attachments/assets/ae34d8c5-6bc7-438f-8c69-14430b56514f" />
 
 ---
 
