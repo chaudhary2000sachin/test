@@ -1,5 +1,25 @@
 # Standard Operating Procedure (SOP): Disk Usage and Ulimit Management
 
+## Purpose
+
+To provide best practices and step-by-step instructions for monitoring disk usage and managing user limits (`ulimit`) on Linux systems, especially in AWS EC2 environments, ensuring system stability, efficient resource utilization, and compliance with industry standards.
+
+## Scope
+
+This SOP applies to Linux-based systems, with a particular focus on AWS EC2 environments. It is intended for system administrators, DevOps engineers, and IT operations staff responsible for monitoring disk usage and configuring user limits.
+
+## Prerequisites
+
+- Access to a Linux system (preferably with root or sudo privileges).
+- Basic knowledge of Linux command-line operations.
+- AWS account and EC2 instance access for storage block management.
+- Familiarity with text editors (e.g., nano, vim) for configuration file edits.
+- Understanding of systemd service management (for resource limits on services).
+
+## Procedure
+
+---
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -132,7 +152,7 @@ sudo mount [options] <device> <mount_point>
         - `w` (write changes)
 
 
-   <img width="723" height="290" alt="Image" src="https://github.com/user-attachments/assets/6f49037e-33a1-4be3-949f-a895dbb41215" />
+    <img width="723" height="290" alt="Image" src="https://github.com/user-attachments/assets/6f49037e-33a1-4be3-949f-a895dbb41215" />
 
 - Now check
 
@@ -249,9 +269,27 @@ sudo mount [options] <device> <mount_point>
 
 ---
 
+## Troubleshooting
+
+- If a new EBS volume does not appear after attachment, verify in AWS Console and check `lsblk` output.
+- If unable to mount a partition, check filesystem type and mount point permissions.
+- After editing `/etc/security/limits.conf`, log out and back in to apply user limits.
+- For systemd service limit changes, ensure `daemon-reload` and service restart are performed.
+- Review system logs (`/var/log/syslog`, `journalctl`) for errors related to disk or ulimit operations.
+
+---
+
 ## References
 
 - [Linux man pages: df(1), du(1), mount(8), umount(8)](https://man7.org/linux/man-pages/)
 - [AWS Documentation: Attaching EBS Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 - [Linux System Administrator’s Guide](https://www.tldp.org/LDP/sag/html/)
 - [systemd Resource Control](https://www.freedesktop.org/software/systemd/man/systemd.resource-control.html)
+
+---
+
+## Revision History
+
+| Version | Date       | Author           | Description                        |
+| ------- | ---------- | ----------------| -----------------------------------|
+| 1.0     | 2025-07-18 | Sachin Chaudhary| Initial creation and documentation |
