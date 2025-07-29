@@ -27,7 +27,7 @@
 
 ## Objective
 
-This Proof of Concept demonstrates the installation, configuration, and basic usage of the Employee REST API—a Golang-based microservice that performs employee-related operations within the OT-Microservices architecture. The API is platform-independent and relies on ScyllaDB (mandatory) as its database and Redis (optional) for caching.
+This Proof of Concept demonstrates the installation, configuration, and basic usage of the Employee REST API—a Golang-based microservice that performs employee-related operations within the OT-Micro[...]
 
 ---
 
@@ -295,6 +295,19 @@ http://<your-public-ip>:8080/api/v1/employee/health
 
 - **Wrong DB IP in config?**
   - Edit `config.yaml` and update `scylladb.host`.
+
+
+- **If Swagger UI shows "page not found", update the Swagger docs URL in your `main.go` file to use your EC2 private IP**
+
+```go
+url := ginSwagger.URL("http://<PRIVATE_IP>:8080/swagger/doc.json")
+```
+
+Replace `<PRIVATE_IP>` with your EC2's private IP.
+
+    
+  Example:  
+   <img width="801" height="499" alt="Image" src="https://github.com/user-attachments/assets/a82c2434-c775-4cba-9b72-416fa90c0e7c" />
 
 ---
 
