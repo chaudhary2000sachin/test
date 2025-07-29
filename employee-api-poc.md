@@ -113,6 +113,7 @@ sudo scylla_setup
 sudo systemctl start scylla-server
 sudo systemctl status scylla-server
 ```
+<img width="1362" height="517" alt="Image" src="https://github.com/user-attachments/assets/c2d94902-0ee0-4d23-b89f-eadfec125300" />
 
 Check node status:
 
@@ -129,6 +130,7 @@ cqlsh <PRIVATE_IP>
 CREATE KEYSPACE IF NOT EXISTS employee_db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 EXIT
 ```
+<img width="1362" height="517" alt="Image" src="https://github.com/user-attachments/assets/fb95a855-c7c7-424e-8936-5fa0cfd2695f" />
 
 ### 7. Install Required Utilities
 
@@ -140,6 +142,7 @@ sudo apt-get update
 sudo apt-get install -y migrate
 migrate -version
 ```
+<img width="1362" height="517" alt="Image" src="https://github.com/user-attachments/assets/f1bd3264-ca7c-4837-a389-c2a57252638f" />
 
 #### jq (JSON processor)
 
@@ -147,6 +150,8 @@ migrate -version
 sudo apt install jq
 jq --version
 ```
+
+<img width="696" height="517" alt="Image" src="https://github.com/user-attachments/assets/86852ec7-35eb-4cdb-8261-4cb2cbe85d1e" />
 
 ### 8. Install Golang
 
@@ -161,6 +166,8 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
 source ~/.profile
 go version
 ```
+
+<img width="711" height="517" alt="Image" src="https://github.com/user-attachments/assets/eb8c9127-a6d1-4383-8275-643230e0207b" />
 
 #### If Go not working, fix Python error
 
@@ -226,15 +233,18 @@ ps aux | grep employee-api
 ### 2. Health Check
 
 ```bash
-curl http://localhost:8081/api/v1/employee/health
+curl http://localhost:8080/api/v1/employee/health
 # Response:
 {"message":"Employee API is running fine and ready to serve requests"}
 ```
+<img width="1172" height="504" alt="Image" src="https://github.com/user-attachments/assets/b9057cbe-42f7-4d65-931b-a89045a68883" />
+
 Or test in browser:
 
 ```
-http://<your-public-ip>:8081/api/v1/employee/health
+http://<your-public-ip>:8080/api/v1/employee/health
 ```
+<img width="1362" height="764" alt="Image" src="https://github.com/user-attachments/assets/10f91475-1338-4d77-a021-27623c061665" />
 
 ### 3. API Endpoints
 
