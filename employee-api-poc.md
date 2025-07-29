@@ -1,4 +1,5 @@
 # Employee API Proof of Concept
+<img width="311" height="162" alt="Image" src="https://github.com/user-attachments/assets/4d1f784e-0f45-499b-86f5-47ca6e6c4940" />
 
 ## Author Information
 | Last Updated On | Version | Author       | Level           | Reviewer   |
