@@ -26,7 +26,7 @@
 
 ## Objective
 
-This Proof of Concept demonstrates the installation, configuration, and basic usage of the Employee REST API—a Golang-based microservice that performs employee-related operations within the OT-Microservices architecture. The API is platform-independent and relies on ScyllaDB (mandatory) as its database and Redis (optional) for caching. This document helps users set up the environment, run the service, and test its endpoints.
+This Proof of Concept demonstrates the installation, configuration, and basic usage of the Employee REST API—a Golang-based microservice that performs employee-related operations within the OT-Microservices architecture. The API is platform-independent and relies on ScyllaDB (mandatory) as its database and Redis (optional) for caching.
 
 ---
 
